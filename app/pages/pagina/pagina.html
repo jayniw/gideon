@@ -5,14 +5,27 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>pagina</ion-title>
+    <ion-buttons start>
+      <button (click)="createTask()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <h1>pagina generada por <b>ionic g page</b></h1>
+  <ion-list>
+    <ion-item-sliding *ngFor="let task of tasks | async">
+      <ion-item>
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-checkbox (click)="updateTask( task )" [(ngModel)]="task.done"></ion-checkbox>
+      </ion-item>
+      <ion-item-options>
+        <button danger (click)="removeTask( task )"> Delete </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

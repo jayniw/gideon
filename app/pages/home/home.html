@@ -1,18 +1,40 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    
+    <ion-title>MEXAS</ion-title>
+    
+    <ion-menu [content]="content">
+      <ion-content>
+        <ion-list>
+          <button ion-item>item 1</button>
+          <button>item 2</button>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="home">
-  <h2>Welcome to Ionic!</h2>
+  <h2>[Mexas] Marvel Agents</h2>
   <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
+    Todo lo relacionado a esta grandiosa alianza de MARVEL: Contest of champions
   </p>
-  <p>
-    Take a look at the <code>app/</code> directory to add or change tabs,
-    update any existing page or create new pages.
+  <h3>LIDER</h3>
+  <p>Kietche</p>
+  <h4>OFICIALES</h4>
+  <p>JefeMaestro27 <br>
+     Emmaga <br>
+     Asiliezar <br>
+     Jayniw </p>
+  <h5>MIEMBROS</h5>
+  <p>Luigui05
+    Dann-96
   </p>
-  <button secondary (click)="goToPaginaPage()">PAGINA!!!</button>
+  <button secondary (click)="goToPaginaPage()">TAREAS</button>
+  <button secondary >MISIONES</button>
+  <button secondary >GESTAS</button>
+  <button secondary >GUERRAS</button>
 </ion-content>

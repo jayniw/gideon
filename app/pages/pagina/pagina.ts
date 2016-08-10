@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+//import { NgForm }    from '@angular/common';
+import { NavController, Alert } from 'ionic-angular';
+import {FirebaseListObservable, FirebaseDatabase} from 'angularfire2';
 /*
   Generated class for the PaginaPage page.
 
@@ -12,8 +13,57 @@ import { NavController } from 'ionic-angular';
 })
 export class PaginaPage {
 
-  constructor(private nav: NavController) {
+  
+tasks: FirebaseListObservable<any>;
 
+  constructor(private navCtrl: NavController , 
+              private database: FirebaseDatabase
+              ) {
+      this.tasks = this.database.list('/tasks')
+  }
+
+  createTask(){
+    let newTaskModal = Alert.create({
+      title: 'Nueva Tarea',
+      message: "Ingrese un titulo para tu nueva tarea",
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Titulo'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => { 
+            console.log('Cancel clicked'); 
+          } 
+        }, 
+        { text: 'Guardar',
+          handler: data => {
+            this.tasks.push({
+              title: data.title,
+              done: false
+            });
+          }
+        }
+      ]
+    });
+    this.navCtrl.present( newTaskModal );
+  }
+
+  updateTask( task ){
+    setTimeout(()=>{
+      this.tasks.update(
+         task.$key,{
+           title: task.title,
+           done: task.done
+         });
+    },1);
+  }
+
+  removeTask ( task ){
+    this.tasks.remove( task );
   }
 
 }
